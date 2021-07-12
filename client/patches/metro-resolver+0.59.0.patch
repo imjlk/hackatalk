@@ -1,0 +1,13 @@
+diff --git a/node_modules/metro-resolver/src/resolve.js b/node_modules/metro-resolver/src/resolve.js
+index b533ed1..2ea5f2d 100644
+--- a/node_modules/metro-resolver/src/resolve.js
++++ b/node_modules/metro-resolver/src/resolve.js
+@@ -479,7 +479,7 @@ function resolveWindowsPath(modulePath) {
+ }
+ 
+ function isRelativeImport(filePath) {
+-  return /^[.][.]?(?:[/]|$)/.test(filePath);
++  return /^\.\.?(?:\/|\\\\|$)/.test(filePath);
+ }
+ 
+ function normalizePath(modulePath) {
