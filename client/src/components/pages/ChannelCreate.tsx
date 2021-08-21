@@ -308,6 +308,8 @@ const ChannelCreate: FC = () => {
 
   useLayoutEffect(() => {
     const pressDone = (): void => {
+      if (selectedUsers.length === 0) return;
+
       const userIds = selectedUsers.map((v) => v.id);
 
       const mutationConfig = {
@@ -332,24 +334,27 @@ const ChannelCreate: FC = () => {
     };
 
     navigation.setOptions({
-      headerRight: (): ReactElement => (
-        <TouchableOpacity testID="touch-done" onPress={pressDone}>
-          <View
-            style={{
-              paddingHorizontal: 16,
-              paddingVertical: 8,
-            }}>
-            <Text
+      headerRight: (): ReactElement =>
+        selectedUsers.length > 0 ? (
+          <TouchableOpacity testID="touch-done" onPress={pressDone}>
+            <View
               style={{
-                color: 'white',
-                fontSize: 14,
-                fontWeight: 'bold',
+                paddingHorizontal: 16,
+                paddingVertical: 8,
               }}>
-              {getString('DONE')}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      ),
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 14,
+                  fontWeight: 'bold',
+                }}>
+                {getString('DONE')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <></>
+        ),
     });
   }, [commitChannel, navigation, selectedUsers]);
 
